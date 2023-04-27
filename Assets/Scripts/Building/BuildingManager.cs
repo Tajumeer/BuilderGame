@@ -9,22 +9,35 @@ public class BuildingManager : MonoBehaviour
     public LayerMask mask;
     private Vector3 mousePos;
     private Camera cam;
-    [SerializeField] private GameObject prefabWoodHarvester;
-    private Transform target;
+    private BuildingTypeSO buildingType;
+    private BuildingTypeListSO buildingTypeList;
+    private void Awake()
+    {
+        buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
+        buildingType = buildingTypeList.list[0];
 
+    }
     private void Start()
     {
         cam = Camera.main;
+
     }
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(prefabWoodHarvester, GetMouseWorldPosition(), Quaternion.identity);
-      
-
+            Instantiate(buildingType.Prefab, GetMouseWorldPosition(), Quaternion.identity);
         }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            buildingType = buildingTypeList.list[0];
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            buildingType = buildingTypeList.list[1];
+        }
+
     }
 
     private Vector3 GetMouseWorldPosition()
