@@ -6,4 +6,5 @@ using UnityEngine;
 public class ResourceTypeListSO : ScriptableObject
 {
     public List<ResourceTypeSO> list;
+
 }
