@@ -1,81 +1,84 @@
-using Mono.Cecil;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using Building;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildingTypeSelectUI : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private Sprite arrowSprite;
-    [SerializeField] private Transform buttonTemplate;
-
-    private Dictionary<BuildingTypeSO, Transform> buttonTransfromDictionary;
-    private Transform arrowButton;
-    private float uiPlacement = 262.5f;
-
-    private void Awake()
+    public class BuildingTypeSelectUI : MonoBehaviour
     {
-        buttonTemplate.gameObject.SetActive(false);
+        [SerializeField] private Sprite _arrowSprite;
+        [SerializeField] private Transform _buttonTemplate;
 
-        BuildingTypeListSO buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
+        private Dictionary<BuildingTypeSO, Transform> _buttonTransformDictionary;
+        private Transform _arrowButton;
+        [SerializeField] private float _uiPlacement = 262.5f;
 
-        buttonTransfromDictionary = new Dictionary<BuildingTypeSO, Transform>();
-
-        int index = 0;
-
-        arrowButton = Instantiate(buttonTemplate, transform);
-        arrowButton.gameObject.SetActive(true);
-
-        float offsetAmount = 175;
-            
-        arrowButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-uiPlacement + offsetAmount * index, 100);
-
-        arrowButton.Find("image").GetComponent<Image>().sprite = arrowSprite;
-
-        arrowButton.GetComponent<Button>().onClick.AddListener(() => { BuildingManager.Instance.SetActiveBuildingType(null); });
-
-        index++;
-
-        foreach (BuildingTypeSO buildingType in buildingTypeList.list)
+        private void Awake()
         {
-            Transform buttonTransform = Instantiate(buttonTemplate, transform);
-            buttonTransform.gameObject.SetActive(true);
+            _buttonTemplate.gameObject.SetActive(false);
 
-            buttonTransform.GetComponent<RectTransform>().anchoredPosition = new Vector2(-uiPlacement + offsetAmount * index, 100);
+            BuildingTypeListSO buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
 
-            buttonTransform.Find("image").GetComponent<Image>().sprite = buildingType.sprite;
+            _buttonTransformDictionary = new Dictionary<BuildingTypeSO, Transform>();
 
-            buttonTransform.GetComponent<Button>().onClick.AddListener(() => { BuildingManager.Instance.SetActiveBuildingType(buildingType); });
+            int index = 0;
 
-            buttonTransfromDictionary[buildingType] = buttonTransform;
+            _arrowButton = Instantiate(_buttonTemplate, transform);
+            _arrowButton.gameObject.SetActive(true);
+
+            float offsetAmount = 175;
+
+            _arrowButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-_uiPlacement + offsetAmount * index, 100);
+
+            _arrowButton.Find("image").GetComponent<Image>().sprite = _arrowSprite;
+
+            _arrowButton.GetComponent<Button>().onClick.AddListener(() => { BuildingManager.Instance.SetActiveBuildingType(null); });
 
             index++;
-        }
-    }
 
-    private void Update()
-    {
-        UpdateActiveBuildingType();
+            foreach (BuildingTypeSO buildingType in buildingTypeList.List)
+            {
+                Transform buttonTransform = Instantiate(_buttonTemplate, transform);
+                buttonTransform.gameObject.SetActive(true);
 
-    }
-    private void UpdateActiveBuildingType()
-    {
-        arrowButton.Find("background").GetComponent<Outline>().enabled = false;
-        foreach (BuildingTypeSO buildingType in buttonTransfromDictionary.Keys)
-        {
-            Transform buttonTransform = buttonTransfromDictionary[buildingType];
-            buttonTransform.Find("background").GetComponent<Outline>().enabled = false;
+                buttonTransform.GetComponent<RectTransform>().anchoredPosition = new Vector2(-_uiPlacement + offsetAmount * index, 100);
+
+                buttonTransform.Find("image").GetComponent<Image>().sprite = buildingType.Sprite;
+
+                buttonTransform.GetComponent<Button>().onClick.AddListener(() => { BuildingManager.Instance.SetActiveBuildingType(buildingType); });
+
+                _buttonTransformDictionary[buildingType] = buttonTransform;
+
+                index++;
+            }
         }
 
-        BuildingTypeSO activeBuildingTyp = BuildingManager.Instance.GetActiveBuildingType();
-        if (activeBuildingTyp == null)
+        // ReSharper disable Unity.PerformanceAnalysis
+        private void Update()
         {
-            arrowButton.Find("background").GetComponent<Outline>().enabled = true;
+            UpdateActiveBuildingType();
         }
-        else
+
+        // ReSharper disable Unity.PerformanceAnalysis
+        private void UpdateActiveBuildingType()
         {
-            buttonTransfromDictionary[activeBuildingTyp].Find("background").GetComponent<Outline>().enabled = true;
+            _arrowButton.Find("background").GetComponent<Outline>().enabled = false;
+            foreach (BuildingTypeSO buildingType in _buttonTransformDictionary.Keys)
+            {
+                Transform buttonTransform = _buttonTransformDictionary[buildingType];
+                buttonTransform.Find("background").GetComponent<Outline>().enabled = false;
+            }
+
+            BuildingTypeSO activeBuildingTyp = BuildingManager.Instance.GetActiveBuildingType();
+            if (activeBuildingTyp == null)
+            {
+                _arrowButton.Find("background").GetComponent<Outline>().enabled = true;
+            }
+            else
+            {
+                _buttonTransformDictionary[activeBuildingTyp].Find("background").GetComponent<Outline>().enabled = true;
+            }
         }
     }
 }

@@ -1,57 +1,60 @@
-using Mono.Cecil;
-using System.Collections;
 using System.Collections.Generic;
+using ResourcesScripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResourcesUI : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private Transform resourceTemplate;
-    private ResourceTypeListSO resourceTypeList;
-    private Dictionary<ResourceTypeSO, Transform> resourceTypeTransformDict;
-    private void Awake()
+    public class ResourcesUI : MonoBehaviour
     {
-        resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
-        resourceTypeTransformDict = new Dictionary<ResourceTypeSO, Transform>();
-
-        resourceTemplate.gameObject.SetActive(false);
-
-        int index = 0;
-        foreach (ResourceTypeSO resourceType in resourceTypeList.list)
+        [SerializeField] private Transform _resourceTemplate;
+        private ResourceTypeListSO _resourceTypeList;
+        private Dictionary<ResourceTypeSO, Transform> _resourceTypeTransformDict;
+        private void Awake()
         {
-            Transform resourceTransform = Instantiate(resourceTemplate, transform);
-            resourceTransform.gameObject.SetActive(true);
+            _resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
+            _resourceTypeTransformDict = new Dictionary<ResourceTypeSO, Transform>();
 
-            float offsetAmount = -180f;
-            resourceTransform.GetComponent<RectTransform>().anchoredPosition = new Vector2(-100f + offsetAmount * index, -100f);
+            _resourceTemplate.gameObject.SetActive(false);
 
-            resourceTransform.Find("Image").GetComponent<Image>().sprite = resourceType.sprite;
+            int index = 0;
+            foreach (ResourceTypeSO resourceType in _resourceTypeList.List)
+            {
+                Transform resourceTransform = Instantiate(_resourceTemplate, transform);
+                resourceTransform.gameObject.SetActive(true);
 
-            resourceTypeTransformDict[resourceType] = resourceTransform;
-            index++;
+                float offsetAmount = -180f;
+                resourceTransform.GetComponent<RectTransform>().anchoredPosition = new Vector2(-100f + offsetAmount * index, -100f);
+
+                resourceTransform.Find("Image").GetComponent<Image>().sprite = resourceType.Sprite;
+
+                _resourceTypeTransformDict[resourceType] = resourceTransform;
+                index++;
+            }
         }
-    }
-    private void Start()
-    {
-        ResourceManager.Instance.OnResourceAmountChanged += ResourceManager_OnResourceAmountChanged;
-        UpdateResourceAmount();
-    }
-
-    private void ResourceManager_OnResourceAmountChanged(object sender, System.EventArgs e)
-    {
-        UpdateResourceAmount();
-    }
-
-    private void UpdateResourceAmount()
-    {
-        foreach (ResourceTypeSO resourceType in resourceTypeList.list)
+        private void Start()
         {
-            Transform resourceTransform = resourceTypeTransformDict[resourceType];
+            ResourceManager.Instance.OnResourceAmountChanged += ResourceManager_OnResourceAmountChanged;
+            UpdateResourceAmount();
+        }
 
-            int resourceAmount = ResourceManager.Instance.GetResourceAmount(resourceType);
+        // ReSharper disable Unity.PerformanceAnalysis
+        private void ResourceManager_OnResourceAmountChanged(object sender, System.EventArgs e)
+        {
+            UpdateResourceAmount();
+        }
 
-            resourceTransform.Find("Text").GetComponent<TextMeshProUGUI>().SetText(resourceAmount.ToString());
+        private void UpdateResourceAmount()
+        {
+            foreach (ResourceTypeSO resourceType in _resourceTypeList.List)
+            {
+                Transform resourceTransform = _resourceTypeTransformDict[resourceType];
+
+                int resourceAmount = ResourceManager.Instance.GetResourceAmount(resourceType);
+
+                resourceTransform.Find("Text").GetComponent<TextMeshProUGUI>().SetText(resourceAmount.ToString());
+            }
         }
     }
 }

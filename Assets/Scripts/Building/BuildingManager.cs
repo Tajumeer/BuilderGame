@@ -1,67 +1,65 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 using UnityEngine.EventSystems;
 
-public class BuildingManager : MonoBehaviour
+namespace Building
 {
-    public static BuildingManager Instance { get; private set; }
-
-    public LayerMask mask;
-    private Vector3 mousePos;
-    private Camera cam;
-    private BuildingTypeSO activeBuildingType;
-    private BuildingTypeListSO buildingTypeList;
-
-    private void Awake()
+    public class BuildingManager : MonoBehaviour
     {
-        Instance = this;
-        buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
-        activeBuildingType = null;
+        public static BuildingManager Instance { get; private set; }
 
-    }
-    private void Start()
-    {
-        cam = Camera.main;
+        public LayerMask Mask;
+        private Vector3 _mousePos;
+        private Camera _cam;
+        private BuildingTypeSO _activeBuildingType;
+        private BuildingTypeListSO _buildingTypeList;
 
-    }
-
-
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        private void Awake()
         {
-            if (activeBuildingType != null)
-                Instantiate(activeBuildingType.Prefab, GetMouseWorldPosition(), Quaternion.identity);
+            Instance = this;
+            _buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
+            _activeBuildingType = null;
+
         }
-    }
-
-    private Vector3 GetMouseWorldPosition()
-    {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 1000, mask))
+        private void Start()
         {
-            mousePos = hit.point;
+            _cam = Camera.main;
+
         }
 
-        return mousePos;
 
-    }
 
-    public void SetActiveBuildingType(BuildingTypeSO buildingType)
-    {
-        activeBuildingType = buildingType;
-    }
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+            {
+                if (_activeBuildingType != null)
+                    Instantiate(_activeBuildingType.Prefab, GetMouseWorldPosition(), Quaternion.identity);
+            }
+        }
 
-    public BuildingTypeSO GetActiveBuildingType()
-    {
-        return activeBuildingType;
+        private Vector3 GetMouseWorldPosition()
+        {
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 1000, Mask))
+            {
+                _mousePos = hit.point;
+            }
+
+            return _mousePos;
+
+        }
+
+        public void SetActiveBuildingType(BuildingTypeSO buildingType)
+        {
+            _activeBuildingType = buildingType;
+        }
+
+        public BuildingTypeSO GetActiveBuildingType()
+        {
+            return _activeBuildingType;
+        }
     }
 }
 

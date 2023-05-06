@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingTypeHolder : MonoBehaviour
+namespace Building
 {
-    public BuildingTypeSO buildingType;
+    public class BuildingTypeHolder : MonoBehaviour
+    {
+        public BuildingTypeSO BuildingType;
+    }
 }
