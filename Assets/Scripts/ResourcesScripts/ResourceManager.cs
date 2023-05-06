@@ -7,7 +7,7 @@ namespace ResourcesScripts
     public class ResourceManager : MonoBehaviour
     {
         public static ResourceManager Instance { get; private set; }
-        private Dictionary<ResourceTypeSO, int> _resourceAmountDictionary;
+        private Dictionary<ResourceTypeSO, int> m_resourceAmountDictionary;
 
         public event EventHandler OnResourceAmountChanged;
 
@@ -15,34 +15,34 @@ namespace ResourcesScripts
         {
             Instance = this;
 
-            _resourceAmountDictionary = new Dictionary<ResourceTypeSO, int>();
+            m_resourceAmountDictionary = new Dictionary<ResourceTypeSO, int>();
 
             ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
 
             foreach (ResourceTypeSO resourceType in resourceTypeList.List)
             {
-                _resourceAmountDictionary[resourceType] = 0;
+                m_resourceAmountDictionary[resourceType] = 0;
             }
         }
 
         private void TestResourceAmountDict()
         {
-            foreach(ResourceTypeSO resourceType in _resourceAmountDictionary.Keys)
+            foreach(ResourceTypeSO resourceType in m_resourceAmountDictionary.Keys)
             {
-                Debug.Log(resourceType.name + ": " + _resourceAmountDictionary[resourceType]);
+                Debug.Log(resourceType.name + ": " + m_resourceAmountDictionary[resourceType]);
             }
         }
 
-        public void AddResource(ResourceTypeSO resourceType, int amount)
+        public void AddResource(ResourceTypeSO _resourceType, int _amount)
         {
-            _resourceAmountDictionary[resourceType] += amount;
+            m_resourceAmountDictionary[_resourceType] += _amount;
 
             OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public int GetResourceAmount(ResourceTypeSO resourceType)
+        public int GetResourceAmount(ResourceTypeSO _resourceType)
         {
-            return _resourceAmountDictionary[resourceType];
+            return m_resourceAmountDictionary[_resourceType];
         }
     }
 }
