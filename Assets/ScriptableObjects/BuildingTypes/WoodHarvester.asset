@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WoodHarvester
   m_EditorClassIdentifier: 
   Prefab: {fileID: 6007647901953510207, guid: b88e2c525aab4a74e9b7804f359fce02, type: 3}
+  GhostName: WoodGhost
   ResourceGeneratorData:
     TimerMax: 0.5
     ResourceType: {fileID: 11400000, guid: 6b48d1184dd8e3b47b530f32e4eab3e1, type: 2}

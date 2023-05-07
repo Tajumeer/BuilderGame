@@ -1,11 +1,19 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 namespace Building
 {
     public class BuildingManager : MonoBehaviour
     {
         public static BuildingManager Instance { get; private set; }
+
+        public event EventHandler<OnActiveBuildingTypeChangedEventArgs> OnActiveBuildingTypeChanged;
+
+        public class OnActiveBuildingTypeChangedEventArgs : EventArgs
+        {
+            public BuildingTypeSO ActiveBuildingType;
+        }
 
         public LayerMask Mask;
         private Vector3 m_mousePos;
@@ -18,14 +26,12 @@ namespace Building
             Instance = this;
             m_buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
             m_activeBuildingType = null;
-
         }
+
         private void Start()
         {
             m_cam = Camera.main;
-
         }
-
 
 
         private void Update()
@@ -37,7 +43,7 @@ namespace Building
             }
         }
 
-        private Vector3 GetMouseWorldPosition()
+        public Vector3 GetMouseWorldPosition()
         {
             Ray ray = m_cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -48,12 +54,13 @@ namespace Building
             }
 
             return m_mousePos;
-
         }
 
-        public void SetActiveBuildingType(BuildingTypeSO buildingType)
+        public void SetActiveBuildingType(BuildingTypeSO _buildingType)
         {
-            m_activeBuildingType = buildingType;
+            m_activeBuildingType = _buildingType;
+            OnActiveBuildingTypeChanged?.Invoke(this,
+                new OnActiveBuildingTypeChangedEventArgs { ActiveBuildingType = m_activeBuildingType });
         }
 
         public BuildingTypeSO GetActiveBuildingType()
@@ -62,4 +69,3 @@ namespace Building
         }
     }
 }
-

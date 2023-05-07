@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StoneHarvester
   m_EditorClassIdentifier: 
   Prefab: {fileID: 6943017901828052471, guid: a4f162525e0c1d444972b671e5a54ab2, type: 3}
+  GhostName: StoneGhost
   ResourceGeneratorData:
     TimerMax: 1
     ResourceType: {fileID: 11400000, guid: f96552d96917b39408ca0db0b2d53ac3, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GoldTrader
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1867446095515026388, guid: faf9e1bf01957bb4bb6bf26669f7d4d8, type: 3}
+  GhostName: GoldGhost
   ResourceGeneratorData:
     TimerMax: 2
     ResourceType: {fileID: 11400000, guid: fa745bc5fa1a7fa44a8567a42fded6ac, type: 2}

@@ -9,15 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867446095515026388}
-  - component: {fileID: 6582663862596424799}
-  - component: {fileID: -4304716873136387851}
   m_Layer: 0
-  m_Name: GoldHarvester
+  m_Name: GoldGhost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1867446095515026388
 Transform:
   m_ObjectHideFlags: 0
@@ -36,31 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6582663862596424799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3809764562679748604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f1a32596ac313b43a1fae93f00bf333, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-4304716873136387851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3809764562679748604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe316bad3ba498e4091536889aca16c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BuildingType: {fileID: 11400000, guid: 41cdd683f2ad8f44f941df68f7b6ee67, type: 2}
 --- !u!1001 &4338455483807420542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,6 +105,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23866121842349680, guid: cbaa1dd953708b947afcaeb2aae7fe67,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e64106658d4bcf94aa94e833d0248c40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaa1dd953708b947afcaeb2aae7fe67, type: 3}
 --- !u!4 &4333945910857923786 stripped
@@ -199,27 +177,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 71e41e43b459a244abaf5acca76b89ee, type: 2}
+      objectReference: {fileID: 2100000, guid: e64106658d4bcf94aa94e833d0248c40, type: 2}
     - target: {fileID: 23495702124195436, guid: 198a52accde14ea498057ec0dfc5a859,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 71e41e43b459a244abaf5acca76b89ee, type: 2}
+      objectReference: {fileID: 2100000, guid: e64106658d4bcf94aa94e833d0248c40, type: 2}
     - target: {fileID: 23545946155381686, guid: 198a52accde14ea498057ec0dfc5a859,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 71e41e43b459a244abaf5acca76b89ee, type: 2}
-    - target: {fileID: 23763204237956136, guid: 198a52accde14ea498057ec0dfc5a859,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 04216b5eace822e4399b0481013eed0d, type: 2}
+      objectReference: {fileID: 2100000, guid: e64106658d4bcf94aa94e833d0248c40, type: 2}
     - target: {fileID: 23776369973000804, guid: 198a52accde14ea498057ec0dfc5a859,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 71e41e43b459a244abaf5acca76b89ee, type: 2}
+      objectReference: {fileID: 2100000, guid: e64106658d4bcf94aa94e833d0248c40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 198a52accde14ea498057ec0dfc5a859, type: 3}
 --- !u!4 &5486720943305592377 stripped
@@ -299,6 +272,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23866121842349680, guid: cbaa1dd953708b947afcaeb2aae7fe67,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e64106658d4bcf94aa94e833d0248c40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaa1dd953708b947afcaeb2aae7fe67, type: 3}
 --- !u!4 &5632034770927954800 stripped

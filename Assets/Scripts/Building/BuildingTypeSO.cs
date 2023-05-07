@@ -1,3 +1,4 @@
+using System;
 using ResourcesScripts;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Building
     {
         public string NameString { get; }
         public Transform Prefab;
+        public string GhostName;
         public ResourceGeneratorData ResourceGeneratorData;
         public Sprite Sprite;
     }
