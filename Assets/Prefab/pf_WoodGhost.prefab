@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6007647901953510207}
   m_Layer: 0
-  m_Name: WoodGhost
+  m_Name: pf_WoodGhost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

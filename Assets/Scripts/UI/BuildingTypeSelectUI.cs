@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Building;
 using UnityEngine;
@@ -54,12 +55,17 @@ namespace UI
             }
         }
 
-        // ReSharper disable Unity.PerformanceAnalysis
-        private void Update()
+        private void Start()
         {
+            BuildingManager.Instance.OnActiveBuildingTypeChanged += BuildingManager_OnActiveBuildingTypeChanged;
             UpdateActiveBuildingType();
         }
 
+        private void BuildingManager_OnActiveBuildingTypeChanged(object _sender, BuildingManager.OnActiveBuildingTypeChangedEventArgs _eventArgs)
+        {
+            UpdateActiveBuildingType();
+        }
+        
         // ReSharper disable Unity.PerformanceAnalysis
         private void UpdateActiveBuildingType()
         {

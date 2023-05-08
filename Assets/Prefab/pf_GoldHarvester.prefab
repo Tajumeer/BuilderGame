@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6582663862596424799}
   - component: {fileID: -4304716873136387851}
   m_Layer: 0
-  m_Name: GoldHarvester
+  m_Name: pf_GoldHarvester
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

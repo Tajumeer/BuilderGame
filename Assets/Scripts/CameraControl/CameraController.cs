@@ -12,7 +12,9 @@ namespace CameraControl
         [SerializeField] private float m_rotationAmount;
         [SerializeField] private float m_minZoom;
         [SerializeField] private float m_maxZoom;
-
+        [SerializeField] private float m_minClamp;
+        [SerializeField] private float m_maxClamp;
+   
         private float m_movementSpeed;
 
         private Vector3 m_newZoom;
@@ -54,6 +56,7 @@ namespace CameraControl
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
                 m_newPosition += (transform.forward * m_movementSpeed);
+                
             }
 
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -85,6 +88,7 @@ namespace CameraControl
             m_cameraTransform.localPosition = Vector3.Lerp(m_cameraTransform.localPosition, m_newZoom, Time.deltaTime * m_movementTime);
             Transform transformCache;
             (transformCache = transform).position = Vector3.Lerp(transform.position, m_newPosition, Time.deltaTime * m_movementTime);
+            m_newPosition = new Vector3(Mathf.Clamp(m_newPosition.x, m_minClamp, m_maxClamp), 10f, Mathf.Clamp(m_newPosition.z, m_minClamp, m_maxClamp));
             transform.rotation = Quaternion.Lerp(transformCache.rotation, m_newRotation, Time.deltaTime * m_movementTime);
         }
     }
