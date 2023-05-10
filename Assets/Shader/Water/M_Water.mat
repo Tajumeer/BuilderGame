@@ -52,16 +52,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.8
-    - _BaseUVScale: 8
-    - _FresnelPower: 1
+    - _Alpha: 0.5
+    - _BaseUVScale: 16
+    - _FresnelPower: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SecondSpeedMulti: 0.5
+    - _SecondSpeedMulti: 0.25
     - _SecondUVScaleMulti: 2
-    - _Smoothness: 14
+    - _Smoothness: 2
     - _UVScale: 12
-    - _WaterBaseSpeed: 0.05
+    - _WaterBaseSpeed: 0.025
     m_Colors:
     - _MainColor: {r: 0.31394625, g: 0.690075, b: 0.7830189, a: 0}
     - _SecondColor: {r: 0.20714669, g: 0.20771417, b: 0.46226418, a: 0}

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ResourcesScripts
 {
     [System.Serializable]
@@ -5,5 +7,7 @@ namespace ResourcesScripts
     {
         public float TimerMax;
         public ResourceTypeSO ResourceType;
+        public float ResourceDetectionRadius;
+        public int MaxResourceAmount;
     }
 }
